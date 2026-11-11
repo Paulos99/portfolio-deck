@@ -1,0 +1,164 @@
+/* ---------- Шрифты: Golos Text — своя рамка презентации; остальные — шрифты брендов ---------- */
+@font-face{font-family:'Golos Text';src:url('../assets/fonts/GolosText.woff') format('woff');font-weight:400 900;font-display:block}
+@font-face{font-family:'Geometria';src:url('../assets/fonts/Geometria.woff') format('woff');font-weight:400;font-display:block}
+@font-face{font-family:'Geometria';src:url('../assets/fonts/Geometria-Medium.woff') format('woff');font-weight:500;font-display:block}
+@font-face{font-family:'Geometria';src:url('../assets/fonts/Geometria-Bold.woff') format('woff');font-weight:700;font-display:block}
+@font-face{font-family:'Geometria';src:url('../assets/fonts/Geometria-Heavy.woff') format('woff');font-weight:800;font-display:block}
+@font-face{font-family:'Manrope';src:url('../assets/fonts/manrope-cyrillic.woff2') format('woff2');font-weight:200 800;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:block}
+@font-face{font-family:'Manrope';src:url('../assets/fonts/manrope-latin.woff2') format('woff2');font-weight:200 800;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215;font-display:block}
+@font-face{font-family:'Cormorant Garamond';src:url('../assets/fonts/Cormorant.woff') format('woff');font-weight:300 700;font-display:block}
+@font-face{font-family:'Unbounded';src:url('../assets/fonts/Unbounded.woff') format('woff');font-weight:200 900;font-display:block}
+@font-face{font-family:'Inter';src:url('../assets/fonts/Inter.woff') format('woff');font-weight:100 900;font-display:block}
+@font-face{font-family:'Onest';src:url('../assets/fonts/Onest.woff') format('woff');font-weight:100 900;font-display:block}
+
+:root{--e-move:cubic-bezier(0.33,0,0.15,1);--e-out:cubic-bezier(0.16,1,0.3,1);--letterbox:#dde3de;
+  /* шкала рамки презентации */--t-xs:22px;--t-s:26px;--t-m:38px}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:var(--letterbox);transition:background-color .7s var(--e-move);
+  font-family:'Golos Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  -webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+::selection{background:#8be6c6;color:#021f19}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--chrome,#8be6c6);outline-offset:3px;border-radius:6px}
+
+#viewport{position:fixed;inset:0;overflow:hidden;touch-action:pan-y pinch-zoom}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,.5));
+  overflow:hidden;contain:strict}
+html.booting #stage{opacity:0}
+
+.slide{position:absolute;inset:0;visibility:hidden;color:var(--ink);font-family:var(--fontText),'Golos Text',system-ui,sans-serif}
+.slide.is-active,.slide.is-leaving,.slide.is-entering{visibility:visible}
+.slide.is-leaving{z-index:1}.slide.is-active{z-index:2}.slide.is-entering{z-index:3}
+.slide>.band,.slide>.bg{position:absolute;inset:0}
+.slide>.band{background:var(--band);visibility:hidden}
+.slide.is-entering>.band{visibility:visible}
+.slide>.bg{overflow:hidden;background:var(--bgC)}
+
+/* ================= Кейс: единая структура ================= */
+.case>.bg{background:radial-gradient(1500px 1000px at 72% 40%,var(--bgA) 0%,var(--bgB) 56%,var(--bgC) 100%)}
+.case .glow{position:absolute;width:1500px;height:1500px;left:820px;top:320px;border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--accent) 20%,transparent) 0%,transparent 62%);
+  animation:drift 24s var(--e-move) infinite alternate;animation-play-state:paused}
+.slide.is-active .glow,.slide.is-entering .glow{animation-play-state:running}
+@keyframes drift{from{transform:translate3d(-140px,50px,0)}to{transform:translate3d(150px,-90px,0)}}
+.case[data-decor=grid]>.bg::after{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(1,100,79,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(1,100,79,.07) 1px,transparent 1px);
+  background-size:120px 60px;background-position:0 0;
+  -webkit-mask-image:radial-gradient(1100px 800px at 72% 55%,#000 0%,transparent 75%);mask-image:radial-gradient(1100px 800px at 72% 55%,#000 0%,transparent 75%)}
+
+.case .copy{position:absolute;left:120px;top:96px;bottom:84px;width:680px;display:flex;flex-direction:column;align-items:flex-start}
+.case .brand{display:flex;align-items:center;gap:20px;height:84px}
+.case .brand img{display:block;width:auto}
+.case .brand span{font-family:var(--fontTitle);font-weight:700;font-size:34px;letter-spacing:-.01em}
+.case .title{margin-top:40px;width:1240px;font-family:var(--fontTitle);font-weight:var(--titleWeight,800);
+  font-size:var(--titleSize,124px);line-height:.95;letter-spacing:var(--titleTracking,-.035em)}
+.case .title span{display:block;width:max-content}
+.case .caption{margin-top:40px;width:600px;font-size:38px;line-height:1.24;font-weight:500;color:var(--muted);text-wrap:balance}
+.case .facts{margin-top:52px;width:540px;list-style:none;display:grid;gap:22px}
+.case .facts li{position:relative;padding-left:40px;font-size:26px;line-height:1.34;font-weight:400}
+.case .facts li::before{content:"";position:absolute;left:0;top:11px;width:18px;height:12px;border-radius:2px;background:var(--accent)}
+.case .url{margin-top:auto;font-size:24px;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:.005em}
+
+.case .device{position:absolute;left:790px;top:372px;width:1130px;height:708px;perspective:2600px;perspective-origin:20% 30%}
+.case .cam{position:absolute;inset:0;transform-origin:40% 45%}
+.case .tilt{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateY(-10deg) rotateX(3deg)}
+
+.laptop{position:absolute;left:40px;top:0;width:1020px}
+.has-phone .laptop{left:10px;width:930px}
+.laptop .lid{position:relative;border-radius:26px 26px 6px 6px;padding:17px 17px 21px;
+  background:linear-gradient(160deg,#25332f 0%,#0d1513 55%,#080d0b 100%);
+  box-shadow:0 0 0 2px rgba(255,255,255,.08) inset,0 60px 110px -30px rgba(0,8,6,.6),0 24px 44px -16px rgba(0,8,6,.4)}
+.laptop .lid::before{content:"";position:absolute;top:7px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#33433f}
+.laptop .screen{position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:var(--screenBg,#f4f7f6)}
+.laptop .base{position:relative;height:28px;margin:0 -70px;border-radius:2px 2px 34px 34px;
+  background:linear-gradient(#e3e9e6 0%,#aeb9b5 45%,#74837e 100%);box-shadow:0 30px 50px -18px rgba(0,8,6,.55)}
+.laptop .base::after{content:"";position:absolute;left:50%;top:0;width:200px;height:9px;margin-left:-100px;border-radius:0 0 12px 12px;background:rgba(0,0,0,.2)}
+[data-frame=light] .laptop .lid{background:linear-gradient(160deg,#3a3f42 0%,#1d2124 60%,#141719 100%);
+  box-shadow:0 0 0 2px rgba(255,255,255,.1) inset,0 60px 100px -34px rgba(20,30,28,.42),0 22px 40px -18px rgba(20,30,28,.3)}
+[data-frame=light] .laptop .base{box-shadow:0 30px 50px -20px rgba(20,30,28,.35)}
+
+.phone{position:absolute;left:820px;top:40px;width:282px;padding:11px;border-radius:50px;
+  background:linear-gradient(150deg,#2a3633,#0b1110);transform:translateZ(60px) rotateY(6deg);
+  box-shadow:0 0 0 2px rgba(255,255,255,.1) inset,0 50px 90px -24px rgba(0,8,6,.65),0 18px 34px -12px rgba(0,8,6,.45)}
+.phone .screen{position:relative;aspect-ratio:584/1264;border-radius:40px;overflow:hidden;background:var(--screenBg,#f4f7f6)}
+.phone::after{content:"";position:absolute;top:22px;left:50%;width:84px;height:24px;margin-left:-42px;border-radius:14px;background:#050908}
+[data-frame=light] .phone{background:linear-gradient(150deg,#3a3f42,#15181a);box-shadow:0 0 0 2px rgba(255,255,255,.12) inset,0 50px 90px -30px rgba(20,30,28,.45),0 16px 30px -14px rgba(20,30,28,.32)}
+
+.screen video,.screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.screen::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.09) 0%,rgba(255,255,255,0) 32%)}
+
+/* Лента в стиле СММ Сферы */
+.tape{position:absolute;left:-120px;width:2300px;height:74px;display:flex;align-items:center;gap:56px;padding-left:40px;white-space:nowrap;
+  font-family:'Unbounded';font-weight:800;font-size:30px;letter-spacing:.02em;text-transform:uppercase}
+.tape b{font-weight:800}
+.tape i{display:inline-block;width:14px;height:14px;border-radius:50%;background:currentColor;opacity:.55}
+.case[data-decor=tape] .copy{bottom:150px}
+.tape.t1{top:994px;transform:rotate(-3deg);background:var(--tape1,#ffdc7e);color:var(--tapeInk1,#4a0d12)}
+.tape.t2{top:1000px;transform:rotate(2deg);background:var(--tape2,#769dba);color:var(--tapeInk2,#141414)}
+.tape .run{display:flex;gap:56px;align-items:center;animation:tape 40s linear infinite;animation-play-state:paused}
+.slide.is-active .tape .run,.slide.is-entering .tape .run{animation-play-state:running}
+.tape.t2 .run{animation-direction:reverse}
+@keyframes tape{to{transform:translate3d(-50%,0,0)}}
+
+/* ================= Обложка и контакты: стена из кадров ================= */
+.cover>.bg{background:radial-gradient(1500px 1000px at 18% 30%,var(--bgA) 0%,var(--bgB) 60%,var(--bgC) 100%)}
+.contacts>.bg{background:radial-gradient(1500px 1000px at 20% 40%,var(--bgA) 0%,var(--bgB) 60%,var(--bgC) 100%)}
+.wall{position:absolute;left:860px;top:-380px;width:1500px;height:1840px;transform:rotate(-13deg);display:flex;gap:28px}
+.wall .col{width:470px;flex:none}
+.wall .track{display:flex;flex-direction:column;gap:28px;animation:wall-up 72s linear infinite;animation-play-state:paused}
+.wall .col:nth-child(2) .track{animation-name:wall-down;animation-duration:86s;margin-top:-140px}
+.wall .col:nth-child(3) .track{animation-duration:64s;margin-top:-300px}
+.slide.is-active .track,.slide.is-entering .track,.slide.is-leaving .track{animation-play-state:running}
+@keyframes wall-up{to{transform:translate3d(0,calc(-50% - 14px),0)}}
+@keyframes wall-down{from{transform:translate3d(0,calc(-50% - 14px),0)}to{transform:translate3d(0,0,0)}}
+.wall .tile{width:470px;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#fff;
+  box-shadow:0 26px 50px -22px rgba(15,29,24,.4),0 6px 14px -8px rgba(15,29,24,.25)}
+.wall .tile img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.veil{position:absolute;inset:0;pointer-events:none}
+.cover .veil{background:linear-gradient(90deg,var(--bgA) 0%,var(--bgA) 30%,color-mix(in srgb,var(--bgA) 70%,transparent) 44%,transparent 62%),
+  linear-gradient(180deg,color-mix(in srgb,var(--bgB) 70%,transparent) 0%,transparent 16%,transparent 84%,color-mix(in srgb,var(--bgC) 80%,transparent) 100%)}
+.contacts .wall{opacity:.5}
+.contacts .veil{background:linear-gradient(90deg,var(--bgB) 0%,var(--bgB) 34%,color-mix(in srgb,var(--bgB) 75%,transparent) 50%,color-mix(in srgb,var(--bgC) 30%,transparent) 72%),
+  linear-gradient(180deg,var(--bgC) 0%,transparent 18%,transparent 82%,var(--bgC) 100%)}
+
+.cover .name{position:absolute;left:110px;top:214px;font-weight:800;font-size:212px;line-height:.86;letter-spacing:-.05em}
+.cover .name span{display:block}
+.cover .sub{position:absolute;left:120px;top:672px;width:640px;font-size:var(--t-m);line-height:1.26;font-weight:500;color:var(--muted);text-wrap:balance}
+.cover .foot{position:absolute;left:120px;bottom:84px;display:flex;gap:56px;align-items:baseline;font-size:var(--t-xs);font-weight:500;color:var(--muted)}
+.foot a,.rows a{color:var(--ink);text-decoration:none;border-bottom:2px solid color-mix(in srgb,var(--accent) 65%,transparent);padding-bottom:3px;transition:border-color .15s}
+.foot a:hover,.rows a:hover{border-color:var(--accent)}
+
+.contacts .title{position:absolute;left:110px;top:200px;font-weight:800;font-size:196px;line-height:.9;letter-spacing:-.05em}
+.contacts .who{position:absolute;left:120px;top:418px;font-size:var(--t-m);font-weight:500;color:var(--muted)}
+.contacts .rows{position:absolute;left:120px;top:560px;width:760px;list-style:none;display:grid}
+.contacts .rows li{display:grid;grid-template-columns:200px 1fr;align-items:baseline;padding:26px 0;border-top:1px solid color-mix(in srgb,var(--ink) 18%,transparent)}
+.contacts .rows li:last-child{border-bottom:1px solid color-mix(in srgb,var(--ink) 18%,transparent)}
+.contacts .rows .k{font-size:var(--t-s);color:var(--muted);font-weight:500}
+.contacts .rows .v{justify-self:start;font-size:44px;font-weight:600;letter-spacing:-.01em}
+.contacts .rows .v.ph{color:color-mix(in srgb,var(--muted) 70%,transparent);font-weight:400}
+
+/* ================= Навигация ================= */
+#chrome{position:absolute;right:64px;top:56px;z-index:10;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;
+  background:var(--chromeBg);color:var(--chrome);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  font-family:'Golos Text',system-ui,sans-serif;transition:color .5s var(--e-move),background-color .5s var(--e-move)}
+#chrome button{appearance:none;border:0;background:transparent;color:inherit;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;cursor:pointer;transition:background-color .15s,opacity .15s}
+#chrome button:hover{background:color-mix(in srgb,currentColor 13%,transparent)}
+#chrome button:active{background:color-mix(in srgb,currentColor 20%,transparent)}
+#chrome button:disabled{opacity:.28;cursor:default;background:transparent}
+#chrome svg{width:22px;height:22px}
+#counter{min-width:92px;text-align:center;font-size:var(--t-xs);font-weight:500;font-variant-numeric:tabular-nums}
+#counter b{font-weight:700}
+#progress{position:absolute;left:0;bottom:0;height:4px;z-index:10;background:var(--chrome);opacity:.45;width:0;transition:width .8s var(--e-out),background-color .5s}
+
+/* ================= Поверните телефон ================= */
+#rotate{position:fixed;inset:0;z-index:50;display:none;place-content:center;justify-items:center;gap:20px;text-align:center;padding:32px;background:#0f1f1b;color:#f0f2ef}
+#rotate svg{width:96px;height:96px;color:#8be6c6;animation:turn 2.8s var(--e-move) infinite}
+#rotate h2{font-size:28px;font-weight:700;letter-spacing:-.01em}
+#rotate p{font-size:17px;line-height:1.45;color:#a9bab3;max-width:290px}
+@keyframes turn{0%,18%{transform:rotate(0)}52%,80%{transform:rotate(-90deg)}100%{transform:rotate(0)}}
+@media (orientation:portrait) and (max-width:900px){#rotate{display:grid}#viewport{visibility:hidden}}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.case .glow,.wall .track,.tape .run,#rotate svg{animation:none!important}}
+@media (max-height:520px){#chrome{transform:scale(1.9);transform-origin:top right}}
