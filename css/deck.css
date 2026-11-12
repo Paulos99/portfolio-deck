@@ -22,7 +22,7 @@ body{background:var(--letterbox);transition:background-color .7s var(--e-move);
 a{color:inherit}
 :focus-visible{outline:3px solid var(--chrome,#8be6c6);outline-offset:3px;border-radius:6px}
 
-#viewport{position:fixed;inset:0;overflow:hidden;touch-action:pan-y pinch-zoom}
+#viewport{position:fixed;inset:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);overflow:hidden;touch-action:pan-y pinch-zoom}
 #stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,.5));
   overflow:hidden;contain:strict}
 html.booting #stage{opacity:0}
@@ -152,8 +152,8 @@ html.booting #stage{opacity:0}
 #progress{position:absolute;left:0;bottom:0;height:4px;z-index:10;background:var(--chrome);opacity:.45;width:0;transition:width .8s var(--e-out),background-color .5s}
 
 /* ================= Поверните телефон ================= */
-#rotate{position:fixed;inset:0;z-index:50;display:none;place-content:center;justify-items:center;gap:20px;text-align:center;padding:32px;background:#0f1f1b;color:#f0f2ef}
-#rotate svg{width:96px;height:96px;color:#8be6c6;animation:turn 2.8s var(--e-move) infinite}
+#rotate{position:fixed;inset:0;z-index:50;display:none;place-content:center;justify-items:center;gap:20px;text-align:center;padding:max(32px,env(safe-area-inset-top)) max(28px,env(safe-area-inset-right)) max(32px,env(safe-area-inset-bottom)) max(28px,env(safe-area-inset-left));background:#0f1f1b;color:#f0f2ef}
+#rotate>svg{width:96px;height:96px;color:#8be6c6;animation:turn 2.8s var(--e-move) infinite}
 #rotate h2{font-size:28px;font-weight:700;letter-spacing:-.01em}
 #rotate p{font-size:17px;line-height:1.45;color:#a9bab3;max-width:290px}
 @keyframes turn{0%,18%{transform:rotate(0)}52%,80%{transform:rotate(-90deg)}100%{transform:rotate(0)}}
@@ -162,3 +162,25 @@ html.booting #stage{opacity:0}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (prefers-reduced-motion:reduce){.case .glow,.wall .track,.tape .run,#rotate svg{animation:none!important}}
 @media (max-height:520px){#chrome{transform:scale(1.9);transform-origin:top right}}
+
+/* ================= Полный экран ================= */
+.fs-cta{appearance:none;display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 26px 0 20px;border-radius:999px;cursor:pointer;
+  font:500 var(--t-xs)/1 'Golos Text',system-ui,sans-serif;color:var(--ink);background:transparent;
+  border:2px solid color-mix(in srgb,var(--ink) 22%,transparent);transition:background-color .15s,border-color .15s,color .15s}
+.fs-cta svg{width:22px;height:22px;flex:none}
+.fs-cta:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.fs-cta:active{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.cover .foot{align-items:center}
+.cover .hint{position:absolute;left:120px;bottom:170px;font-size:var(--t-xs);font-weight:500;color:var(--muted)}
+.cover .foot .ios-hint{max-width:520px;line-height:1.3}
+.cover .foot .fs-cta{margin:-14px 0}
+.fs-cta--big{--ink:#f0f2ef;--accent:#8be6c6;margin-top:10px;height:52px;padding:0 24px 0 18px;font-size:17px;color:#0f1d18;background:#8be6c6;border-color:#8be6c6}
+.fs-cta--big:hover{background:#a6eed4;border-color:#a6eed4}
+.fs-cta--big svg{width:20px;height:20px}
+.ios-hint{display:none}
+#rotate .ios-hint{max-width:280px;font-size:15px;line-height:1.45;color:#a9bab3}
+.cover .foot .ios-hint{color:var(--muted)}
+html.fs-no .fs-cta,html.fs-no #fs,html.is-fs .fs-cta,html.is-fs #fs,html.is-standalone .fs-cta,html.is-standalone #fs{display:none}
+html.fs-ios .ios-hint{display:inline}
+html.fs-ios #rotate .ios-hint{display:block}
+#chrome #fs{margin-right:2px}

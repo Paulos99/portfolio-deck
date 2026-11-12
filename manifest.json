@@ -1,0 +1,30 @@
+{
+  "name": "Павел Анцибор. Портфолио",
+  "short_name": "Портфолио",
+  "description": "Веб-презентация: семь проектов, сайты, сервисы и CRM",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": [
+    "fullscreen",
+    "standalone"
+  ],
+  "orientation": "landscape",
+  "background_color": "#0f1d18",
+  "theme_color": "#0f1d18",
+  "icons": [
+    {
+      "src": "assets/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

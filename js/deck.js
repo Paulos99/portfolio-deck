@@ -1,6 +1,7 @@
 /* Движок презентации: сборка слайдов из DECK, масштаб сцены, навигация и общий переход. */
 (() => {
   'use strict';
+  const params0 = new URLSearchParams(location.search);
   const D = window.DECK;
   const stage = document.getElementById('stage');
   const counter = document.getElementById('counter');
@@ -41,7 +42,8 @@
       return { bg: wall(s.columns), body: `
         <h1 class="name"><span class="el" style="--i:0">${esc(s.name[0])}</span><span class="el" style="--i:1">${esc(s.name[1])}</span></h1>
         <p class="sub el" style="--i:2">${esc(s.sub)}</p>
-        <div class="foot el" style="--i:3"><a href="${s.link.href}" target="_blank" rel="noopener">${esc(s.link.text)}</a><span>${esc(s.hint)}</span></div>` };
+        <div class="foot el" style="--i:3"><a href="${s.link.href}" target="_blank" rel="noopener">${esc(s.link.text)}</a><button type="button" class="fs-cta" data-fs><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><span>На весь экран</span></button><span class="ios-hint">Полный экран: «Поделиться» → «На экран „Домой“»</span></div>
+        <p class="hint el" style="--i:3">${esc(s.hint)}</p>` };
     },
     case(s) {
       const d = s.device || {};
@@ -91,7 +93,9 @@
 
   /* ----- масштаб сцены ----- */
   function fit() {
-    const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+    const vpEl = document.getElementById('viewport');
+    const w = vpEl.clientWidth || innerWidth, h = vpEl.clientHeight || innerHeight;
+    const s = Math.min(w / 1920, h / 1080);
     stage.style.setProperty('--s', s);
   }
   addEventListener('resize', fit); fit();
@@ -166,10 +170,53 @@
   }
   const next = () => go(cur + 1), prev = () => go(cur - 1);
 
+
+  /* ----- полный экран ----- */
+  const FS = (() => {
+    const root = document.documentElement;
+    const forceIOS = params0.get('fs') === 'ios';
+    const supported = !forceIOS && !!(root.requestFullscreen || root.webkitRequestFullscreen) &&
+      (document.fullscreenEnabled !== false && document.webkitFullscreenEnabled !== false);
+    const isIOS = forceIOS || /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const standalone = matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches || navigator.standalone === true;
+    let tried = false;
+    const element = () => document.fullscreenElement || document.webkitFullscreenElement || null;
+    const lock = () => { try { const o = screen.orientation; if (o && o.lock) o.lock('landscape').catch(() => {}); } catch (e) {} };
+    function enter() {
+      if (!supported || element()) return Promise.resolve();
+      tried = true;
+      let p;
+      try { p = root.requestFullscreen ? root.requestFullscreen({ navigationUI: 'hide' }) : root.webkitRequestFullscreen(); } catch (e) { p = null; }
+      return Promise.resolve(p).then(lock, () => {});
+    }
+    function exit() {
+      if (!element()) return;
+      try { (document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen()).catch?.(() => {}); } catch (e) {}
+    }
+    const sync = () => { root.classList.toggle('is-fs', !!element()); fit(); };
+    document.addEventListener('fullscreenchange', sync);
+    document.addEventListener('webkitfullscreenchange', sync);
+    root.classList.add(supported ? 'fs-ok' : 'fs-no');
+    if (!supported && isIOS && !standalone) root.classList.add('fs-ios');
+    if (standalone) root.classList.add('is-standalone');
+    document.addEventListener('click', e => {
+      const b = e.target.closest('[data-fs]'); if (!b) return;
+      e.preventDefault(); e.stopPropagation(); tried = true;
+      element() ? exit() : enter();
+    });
+    return {
+      supported, enter, exit, toggle: () => (element() ? exit() : enter()),
+      /* true, если этот жест потрачен на вход в полный экран */
+      firstGesture() { if (tried || !supported || standalone || element()) return false; enter(); return true; }
+    };
+  })();
+
   /* ----- управление ----- */
   addEventListener('keydown', e => {
     if (e.altKey || e.ctrlKey || e.metaKey) return;
     const k = e.key;
+    if (k === 'f' || k === 'F' || k === 'а' || k === 'А') { e.preventDefault(); FS.toggle(); return; }
+    if (k !== 'Escape' && k !== 'Tab' && !e.target.closest('a,button') && FS.firstGesture()) { e.preventDefault(); return; }  // первое нажатие только разворачивает
     if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(k)) { if (k === 'Enter' && e.target.closest('a,button')) return; e.preventDefault(); next(); }
     else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); prev(); }
     else if (k === 'Home') { e.preventDefault(); go(0); }
@@ -184,6 +231,7 @@
   vp.addEventListener('pointerup', e => {
     if (!p0) return; const dx = e.clientX - p0.x, dy = e.clientY - p0.y; const start = p0; p0 = null;
     if (e.target.closest('a,button')) return;
+    if (FS.firstGesture()) return;   // первое касание только разворачивает на весь экран
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) { dx < 0 ? next() : prev(); return; }
     if (Math.abs(dx) < 8 && Math.abs(dy) < 8 && performance.now() - start.t < 600) { e.clientX < innerWidth * 0.3 ? prev() : next(); }
   });
