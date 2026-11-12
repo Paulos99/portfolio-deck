@@ -51,16 +51,20 @@ html.booting #stage{opacity:0}
 .case .brand{display:flex;align-items:center;gap:20px;height:84px}
 .case .brand img{display:block;width:auto}
 .case .brand span{font-family:var(--fontTitle);font-weight:700;font-size:34px;letter-spacing:-.01em}
-.case .title{margin-top:40px;width:1240px;font-family:var(--fontTitle);font-weight:var(--titleWeight,800);
-  font-size:var(--titleSize,124px);line-height:.95;letter-spacing:var(--titleTracking,-.035em)}
+.case .title{margin-top:30px;width:1240px;font-family:var(--fontTitle);font-weight:var(--titleWeight,800);
+  font-size:var(--titleSize,104px);line-height:.95;letter-spacing:var(--titleTracking,-.035em)}
 .case .title span{display:block;width:max-content}
-.case .caption{margin-top:40px;width:600px;font-size:38px;line-height:1.24;font-weight:500;color:var(--muted);text-wrap:balance}
-.case .facts{margin-top:52px;width:540px;list-style:none;display:grid;gap:22px}
-.case .facts li{position:relative;padding-left:40px;font-size:26px;line-height:1.34;font-weight:400}
-.case .facts li::before{content:"";position:absolute;left:0;top:11px;width:18px;height:12px;border-radius:2px;background:var(--accent)}
-.case .url{margin-top:auto;font-size:24px;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:.005em}
+.case .what{margin-top:26px;width:600px;font-size:31px;line-height:1.22;font-weight:600;color:var(--ink);text-wrap:balance}
+.case .story{margin-top:30px;width:600px;display:grid}
+.case .story div{display:grid;grid-template-columns:132px 1fr;column-gap:16px;align-items:baseline;padding:13px 0;
+  border-top:1px solid color-mix(in srgb,var(--ink) 16%,transparent)}
+.case .story div:last-child{border-bottom:1px solid color-mix(in srgb,var(--ink) 16%,transparent)}
+.case .story dt{font-size:21px;font-weight:700;color:var(--accent);letter-spacing:.005em}
+.case .story dd{font-size:22px;line-height:1.32;font-weight:400;color:var(--muted);text-wrap:pretty}
+.case .who{margin-top:20px;width:600px;font-size:21px;line-height:1.3;font-weight:500;color:var(--muted)}
+.case .url{margin-top:auto;padding-top:16px;font-size:24px;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:.005em}
 
-.case .device{position:absolute;left:790px;top:372px;width:1130px;height:708px;perspective:2600px;perspective-origin:20% 30%}
+.case .device{position:absolute;left:812px;top:372px;width:1130px;height:708px;perspective:2600px;perspective-origin:20% 30%}
 .case .cam{position:absolute;inset:0;transform-origin:40% 45%}
 .case .tilt{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateY(-10deg) rotateX(3deg)}
 

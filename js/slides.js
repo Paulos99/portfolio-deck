@@ -12,8 +12,7 @@ window.DECK = {
       theme: { bgA: '#f0f2ef', bgB: '#e5e9e5', bgC: '#dde3de', ink: '#0f1d18', muted: '#4f5e58', accent: '#01644f', band: '#0f1d18',
                chrome: '#0f1d18', chromeBg: 'rgba(240,242,239,.82)' },
       name: ['Павел', 'Анцибор'],
-      sub: 'Портфолио. Семь проектов: сервисы для звукоизоляции, сайты и CRM',
-      link: { href: 'https://github.com/Paulos99', text: 'github.com/Paulos99' },
+      sub: 'Делаю сайты и онлайн-сервисы для бизнеса. Здесь семь проектов, которые уже работают',
       hint: 'Листайте стрелками, кликом или свайпом',
       columns: [
         ['problemomer', 'eslavia-site', 'crm', 'calculator'],
@@ -28,11 +27,13 @@ window.DECK = {
                fontTitle: "'Geometria'", fontText: "'Geometria'", titleWeight: 800 },
       logo: { src: 'assets/img/logo-multiframe.png', alt: 'MultiFrame', height: 44 },
       title: ['Проблемомер', 'MultiFrame'],
-      caption: 'Узнать, насколько станет тише в помещении со звукоизоляцией?',
-      facts: [
-        'Мастер из семи экранов, без регистрации',          // projects.md, стр. 105 и 107
-        'Звук «до» и «после» и PDF с результатом'          // projects.md, стр. 112–113
+      what: 'Онлайн-тест: насколько тише станет комната после звукоизоляции потолка',
+      rows: [
+        ['Задача', 'Выбирая натяжной потолок, о шуме сверху почти не думают. А эффект звукоизоляции до монтажа не увидеть'],
+        ['Решение', 'Семь простых вопросов о комнате. В ответ «на сколько процентов тише» и звук «до» и «после»'],
+        ['Результат', 'Клиент сам слышит разницу и с PDF-отчётом идёт в калькулятор или на консультацию']
       ],
+      who: 'Для покупателей натяжных потолков, без регистрации',
       url: 'stp-multiframe.ru/problemomer',                // projects.md, стр. 98
       device: {
         laptop: { video: 'assets/video/problemomer.mp4', poster: 'assets/video/problemomer.jpg', label: 'Проблемомер на компьютере' },
@@ -46,11 +47,13 @@ window.DECK = {
                fontTitle: "'Manrope'", fontText: "'Manrope'", titleWeight: 800, frame: 'light' },
       logo: { src: 'assets/img/logo-multiframe-green.png', alt: 'MultiFrame', height: 44 },
       title: ['Калькулятор', 'MultiFrame'],
-      caption: 'Быстрый расчёт и автоматическая раскладка звукоизоляции для потолка и стен',
-      facts: [
-        'Мастер из пяти шагов: прямоугольник, Г-форма или свой контур',   // projects.md, стр. 70 и 74
-        'Схема укладки с подрезками и смета в PDF'                         // projects.md, стр. 74
+      what: 'Онлайн-калькулятор: сколько панелей MultiFrame нужно на потолок или стены и как их уложить',
+      rows: [
+        ['Задача', 'Посчитать панели вручную для комнаты сложной формы, с окнами и дверями, долго и легко ошибиться'],
+        ['Решение', 'Мастер из пяти шагов: форма комнаты, высота, окна и двери. Схема укладки с подрезками строится сама'],
+        ['Результат', 'Число панелей, смета и схема в PDF за один заход. Расчётом можно поделиться ссылкой']
       ],
+      who: 'Для клиентов и партнёров StP',
       url: 'stp-multiframe.ru/calc',                                       // projects.md, стр. 15
       device: { laptop: { video: 'assets/video/calculator.mp4', poster: 'assets/video/calculator.jpg', label: 'Калькулятор MultiFrame' } }
     },
@@ -61,11 +64,13 @@ window.DECK = {
                fontTitle: "'Geometria'", fontText: "'Geometria'", titleWeight: 800 },
       logo: { src: 'assets/img/logo-multiframe.png', alt: 'MultiFrame', height: 44 },
       title: ['Кабинет партнёра', 'MultiFrame'],
-      caption: 'CRM для сети компаний монтажа звукоизоляции',
-      facts: [
-        'Владелец, менеджер, замерщик и монтажники работают в одном месте',  // projects.md, стр. 39
-        'Смета и КП собираются автоматически'                               // projects.md, стр. 39
+      what: 'Рабочий кабинет для компаний, которые продают и монтируют MultiFrame',
+      rows: [
+        ['Задача', 'Владелец, менеджер, замерщик и монтажник работают с одним проектом, а StP видит всю сеть'],
+        ['Решение', 'Свой экран для каждой роли. В проекте комнаты, Проблемомер, калькулятор и календарь замеров'],
+        ['Результат', 'Смета и КП собираются автоматически. Есть обучение с тренажёром и воронка продаж']
       ],
+      who: 'Для партнёров StP и их команд',
       url: 'partner.stp-multiframe.ru/cabinet',                             // projects.md, стр. 14
       device: { laptop: { video: 'assets/video/partner.mp4', poster: 'assets/video/partner.jpg', label: 'Кабинет партнёра, демо-данные' } }
     },
@@ -73,18 +78,20 @@ window.DECK = {
       type: 'case', id: 'eslavia',
       theme: { bgA: '#fffcfa', bgB: '#f8efeb', bgC: '#efe3de', ink: '#3d2f2c', muted: '#7a6662', accent: '#60413d', band: '#60413d',
                chrome: '#3d2f2c', chromeBg: 'rgba(255,252,250,.82)', screenBg: '#faf8f6',
-               fontTitle: "'Cormorant Garamond'", fontText: "'Manrope'", titleWeight: 500, titleSize: 168, titleTracking: '-0.02em', frame: 'light' },
+               fontTitle: "'Cormorant Garamond'", fontText: "'Manrope'", titleWeight: 500, titleSize: 150, titleTracking: '-0.02em', frame: 'light' },
       logo: { src: 'assets/img/logo-eslavia.svg', alt: 'Эславия', height: 52 },
       title: ['Эславия'],
-      caption: 'Сайт-каталог женского трикотажа для оптовиков',
-      facts: [
-        '98 моделей, фильтры по категориям и размерам',   // projects.md, стр. 147 и 151
-        'Оптовый прайс по запросу'                         // projects.md, стр. 149
+      what: 'Сайт-каталог женского трикотажа для оптовых и розничных покупателей',
+      rows: [
+        ['Задача', 'Покупателю нужно быстро найти модели своего размера и понять цену'],
+        ['Решение', 'Каталог на 98 моделей с фильтрами по категориям и размерам, удобный и с телефона'],
+        ['Результат', 'Розничные цены видны сразу, оптовый прайс по запросу, заказ прямо из карточки модели']
       ],
+      who: 'Самовывоз: Иваново и Кохма',
       url: 'eslavia.ru',                                   // projects.md, стр. 137
       device: {
         laptop: { video: 'assets/video/eslavia-site.mp4', poster: 'assets/video/eslavia-site.jpg', label: 'Сайт eslavia.ru' },
-        phone:  { video: 'assets/video/eslavia-app.mp4', poster: 'assets/video/eslavia-app.jpg', label: 'Оптовый каталог в Telegram' }
+        phone:  { video: 'assets/video/eslavia-app.mp4', poster: 'assets/video/eslavia-app.jpg', label: 'Каталог на телефоне' }
       }
     },
     {
@@ -92,14 +99,16 @@ window.DECK = {
       tape: ['контент', 'продакшн', 'трафик', 'спецпроекты', 'стратегия'],   // слова с ленты на smmsfera.ru
       theme: { bgA: '#c22b36', bgB: '#8a1b23', bgC: '#4a0d12', ink: '#ffffff', muted: '#f3c9cc', accent: '#ffdc7e', band: '#ffdc7e',
                chrome: '#fff1f1', chromeBg: 'rgba(74,13,18,.55)', screenBg: '#f4efe9',
-               fontTitle: "'Unbounded'", fontText: "'Inter'", titleWeight: 800, titleSize: 132, titleTracking: '-0.03em' },
+               fontTitle: "'Unbounded'", fontText: "'Inter'", titleWeight: 800, titleSize: 116, titleTracking: '-0.03em' },
       logo: { src: 'assets/img/logo-sfera.webp', alt: 'СММ Сфера', height: 92 },
       title: ['СММ Сфера'],
-      caption: 'Сайт SMM-агентства',
-      facts: [
-        'Ведение соцсетей под ключ: ВКонтакте, Telegram, съёмка, таргет',   // projects.md, стр. 183
-        'Цены и заявка прямо на странице'                                  // projects.md, стр. 183
+      what: 'Сайт агентства, которое ведёт соцсети бизнеса',
+      rows: [
+        ['Задача', 'По сайту должно быть сразу понятно, что агентство делает, сколько это стоит и как оставить заявку'],
+        ['Решение', 'Яркий сайт в духе «секретных операций»: услуги, цены, кейсы и форма заявки'],
+        ['Результат', 'Сайт работает на своём домене с сентября 2026, заявки приходят агентству на почту']
       ],
+      who: 'ВКонтакте, Telegram, съёмка, таргет, отчёты',
       url: 'smmsfera.ru',                                                  // projects.md, стр. 175
       device: { laptop: { video: 'assets/video/sfera.mp4', poster: 'assets/video/sfera.jpg', label: 'Сайт smmsfera.ru' } }
     },
@@ -108,14 +117,16 @@ window.DECK = {
       tape: ['контент в систему', 'аудиторию в клиентов'],   // лента на smmorbita.ru, projects.md стр. 228
       theme: { bgA: '#1f2a3d', bgB: '#161a21', bgC: '#121212', ink: '#f4f4eb', muted: '#b4b4ad', accent: '#f4d970', band: '#5395e9',
                chrome: '#f4f4eb', chromeBg: 'rgba(20,20,20,.6)', screenBg: '#141414',
-               fontTitle: "'Unbounded'", fontText: "'Inter'", titleWeight: 800, titleSize: 132, titleTracking: '-0.03em', tape1: '#f4d970', tapeInk1: '#141414' },
+               fontTitle: "'Unbounded'", fontText: "'Inter'", titleWeight: 800, titleSize: 116, titleTracking: '-0.03em', tape1: '#f4d970', tapeInk1: '#141414' },
       logo: { src: 'assets/img/logo-orbita.webp', alt: 'СММ Школа', height: 100 },
       title: ['СММ Орбита'],
-      caption: 'Онлайн-школа SMM-агентства',
-      facts: [
-        'Уроки с презентацией, лекцией и методичкой',      // projects.md, стр. 217
-        'Кабинет преподавателя: роли и доступ к урокам'    // projects.md, стр. 217
+      what: 'Закрытая онлайн-школа агентства: уроки и материалы для учеников',
+      rows: [
+        ['Задача', 'Ученикам нужен один вход ко всем урокам. Преподавателю нужно решать, кто какие уроки видит'],
+        ['Решение', 'Кабинет ученика: презентация, лекция, видео и методичка к уроку. Кабинет преподавателя с ролями'],
+        ['Результат', 'Материалы открываются только по личному входу. Учеников и уроки преподаватель добавляет сам']
       ],
+      who: 'Для учеников и преподавателей школы',
       url: 'smmorbita.ru',                                 // projects.md, стр. 206
       device: { laptop: { video: 'assets/video/orbita.mp4', poster: 'assets/video/orbita.jpg', label: 'Урок в СММ Школе' } }
     },
@@ -123,14 +134,16 @@ window.DECK = {
       type: 'case', id: 'crm',
       theme: { bgA: '#ffffff', bgB: '#f5f6f5', bgC: '#e6ebe7', ink: '#23332f', muted: '#59635e', accent: '#204f42', band: '#133e35',
                chrome: '#23332f', chromeBg: 'rgba(255,255,255,.8)', screenBg: '#f5f6f5',
-               fontTitle: "'Onest'", fontText: "'Onest'", titleWeight: 700, titleSize: 140, frame: 'light' },
+               fontTitle: "'Onest'", fontText: "'Onest'", titleWeight: 700, titleSize: 124, frame: 'light' },
       logo: { src: 'assets/img/icon-crm-192.png', alt: '', height: 56, text: 'СММ CRM' },
       title: ['CRM СММ'],
-      caption: 'Онлайн-платформа для ведения проектов SMM-агентства',
-      facts: [
-        'Контент-план: месяц, неделя, день и таблица',     // projects.md, стр. 248
-        'Два согласования и роли команды'                  // projects.md, стр. 248
+      what: 'Рабочая платформа агентства: проекты, контент-план, задачи и команда в одном месте',
+      rows: [
+        ['Задача', 'Публикации для многих клиентов нужно планировать и согласовывать, ничего не упуская'],
+        ['Решение', 'Контент-план по месяцам, неделям и дням, два согласования, задачи, аналитика и роли команды'],
+        ['Результат', 'Правка после проверки сама сбрасывает согласование, и непроверенный текст не уходит в работу']
       ],
+      who: 'Для владельца, руководителей и SMM-специалистов',
       url: 'crm-smmsfera.ru',                              // projects.md, стр. 238
       device: { laptop: { video: 'assets/video/crm.mp4', poster: 'assets/video/crm.jpg', label: 'Контент-план в CRM' } }
     },
@@ -141,9 +154,9 @@ window.DECK = {
       title: 'Контакты',
       name: 'Павел Анцибор',
       rows: [
-        { label: 'GitHub', value: 'github.com/Paulos99', href: 'https://github.com/Paulos99' },
-        { label: 'Почта', value: 'уточняется', placeholder: true },
-        { label: 'Telegram', value: 'уточняется', placeholder: true }
+        { label: 'Телефон', value: '+7 910 997-33-01', href: 'tel:+79109973301' },
+        { label: 'Почта', value: 'Pavel_antsibor@vk.com', href: 'mailto:Pavel_antsibor@vk.com' },
+        { label: 'Город', value: 'Иваново' }
       ],
       columns: [
         ['crm', 'orbita', 'partner', 'eslavia-site'],

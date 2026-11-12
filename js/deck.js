@@ -42,7 +42,7 @@
       return { bg: wall(s.columns), body: `
         <h1 class="name"><span class="el" style="--i:0">${esc(s.name[0])}</span><span class="el" style="--i:1">${esc(s.name[1])}</span></h1>
         <p class="sub el" style="--i:2">${esc(s.sub)}</p>
-        <div class="foot el" style="--i:3"><a href="${s.link.href}" target="_blank" rel="noopener">${esc(s.link.text)}</a><button type="button" class="fs-cta" data-fs><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><span>На весь экран</span></button><span class="ios-hint">Полный экран: «Поделиться» → «На экран „Домой“»</span></div>
+        <div class="foot el" style="--i:3">${s.link ? `<a href="${s.link.href}" target="_blank" rel="noopener">${esc(s.link.text)}</a>` : ''}<button type="button" class="fs-cta" data-fs><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><span>На весь экран</span></button><span class="ios-hint">Полный экран: «Поделиться» → «На экран „Домой“»</span></div>
         <p class="hint el" style="--i:3">${esc(s.hint)}</p>` };
     },
     case(s) {
@@ -55,8 +55,9 @@
         <div class="copy">
           <div class="brand el" style="--i:0">${logo}</div>
           <h2 class="title el" style="--i:1">${s.title.map(t => `<span>${esc(t)}</span>`).join('')}</h2>
-          <p class="caption el" style="--i:2">${esc(s.caption)}</p>
-          ${s.facts && s.facts.length ? `<ul class="facts el" style="--i:3">${s.facts.map(f => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
+          <p class="what el" style="--i:2">${esc(s.what)}</p>
+          <dl class="story el" style="--i:3">${s.rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+          ${s.who ? `<p class="who el" style="--i:4">${esc(s.who)}</p>` : ''}
           <a class="url el" style="--i:4" href="https://${s.url}" target="_blank" rel="noopener">${esc(s.url)}</a>
         </div>
         <div class="device el ${d.phone ? 'has-phone' : ''}" style="--i:2"><div class="cam"><div class="tilt">
@@ -65,7 +66,7 @@
     },
     contacts(s) {
       const rows = s.rows.map(r => `<li><span class="k">${esc(r.label)}</span>${r.href
-        ? `<a class="v" href="${r.href}" target="_blank" rel="noopener">${esc(r.value)}</a>`
+        ? `<a class="v" href="${r.href}"${/^https?:/.test(r.href) ? ' target="_blank" rel="noopener"' : ''}>${esc(r.value)}</a>`
         : `<span class="v${r.placeholder ? ' ph' : ''}">${esc(r.value)}</span>`}</li>`).join('');
       return { bg: wall(s.columns), body: `
         <h2 class="title el" style="--i:0">${esc(s.title)}</h2>
